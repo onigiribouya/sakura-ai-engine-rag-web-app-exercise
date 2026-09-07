@@ -1,0 +1,239 @@
+/*
+  RAG Q&A App styling
+
+  Approach (implementation spec, section 39):
+    - Keep it white-based
+    - Single column, centered on the screen
+    - Split the input, settings, answer, and sources areas into cards
+    - No excessive decoration or animation
+    - No images or external libraries
+*/
+
+/* ---- Global base settings ---- */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 24px 16px 64px;
+  font-family: "Segoe UI", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+  line-height: 1.7;
+  color: #333;
+  background-color: #f5f6f7;
+}
+
+/* ---- Centered single column ---- */
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+/* ---- Header ---- */
+.app-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.app-header h1 {
+  font-size: 1.6rem;
+  margin: 0 0 12px;
+}
+
+.lead {
+  margin: 0 0 8px;
+  color: #444;
+}
+
+.note {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #777;
+}
+
+/* ---- Cards (shared style for each area) ---- */
+.card {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.card-title {
+  font-size: 1.1rem;
+  margin: 0 0 16px;
+}
+
+/* ---- Labels and input fields ---- */
+.field-label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  font-family: inherit;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  resize: vertical;
+}
+
+input[type="number"] {
+  width: 80px;
+  padding: 8px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+/* ---- Parameter settings ---- */
+.param {
+  margin-bottom: 20px;
+}
+
+.param:last-child {
+  margin-bottom: 0;
+}
+
+.param-desc {
+  margin: 8px 0 0;
+  font-size: 0.85rem;
+  color: #777;
+}
+
+/* Lay the threshold slider and its current value out side by side */
+.slider-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.slider-row input[type="range"] {
+  flex: 1;
+}
+
+.slider-value {
+  font-size: 0.9rem;
+  white-space: nowrap;
+  color: #444;
+}
+
+/* ---- Fixed settings ---- */
+.fixed-settings {
+  background-color: #fafafa;
+}
+
+.fixed-settings ul {
+  margin: 0;
+  padding-left: 1.2em;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+/* ---- Submit button ---- */
+.submit-button {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  font-size: 1.05rem;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #2b7de9;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.submit-button:hover {
+  background-color: #2468c0;
+}
+
+/* Disable the button while submitting, and change how it looks */
+.submit-button:disabled {
+  background-color: #9bb8db;
+  cursor: not-allowed;
+}
+
+/* ---- Error display ---- */
+.error-area {
+  padding: 14px 16px;
+  margin-bottom: 20px;
+  color: #a12b2b;
+  background-color: #fdeaea;
+  border: 1px solid #f0bcbc;
+  border-radius: 8px;
+}
+
+/* ---- Answer display ---- */
+/*
+  The answer text is shown with line breaks preserved (white-space: pre-wrap).
+  Note: Markdown symbols (like - or *) are shown as plain characters.
+*/
+.answer-text {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* ---- Sources display ---- */
+.source-item {
+  border: 1px solid #e6e6e6;
+  border-radius: 6px;
+  padding: 12px 14px;
+  margin-bottom: 12px;
+  background-color: #fafafa;
+}
+
+.source-item:last-child {
+  margin-bottom: 0;
+}
+
+.source-item h3 {
+  font-size: 0.95rem;
+  margin: 0 0 8px;
+}
+
+.source-meta {
+  margin: 2px 0;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+/* Contents of the details (collapsible) element */
+.source-item details {
+  margin-top: 8px;
+}
+
+.source-item summary {
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: #2b7de9;
+}
+
+.source-content {
+  white-space: pre-wrap;
+  word-break: break-word;
+  margin-top: 8px;
+  padding: 10px;
+  font-size: 0.85rem;
+  background-color: #ffffff;
+  border: 1px solid #e6e6e6;
+  border-radius: 6px;
+}
+
+.source-id {
+  margin-top: 8px;
+  font-size: 0.8rem;
+  color: #888;
+  word-break: break-all;
+}
+
+/* Message shown when there are no sources */
+.no-sources {
+  font-size: 0.9rem;
+  color: #777;
+}

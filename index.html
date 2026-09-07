@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RAG Q&A App</title>
+  <!-- Load the CSS (served from Flask's static folder) -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<!--[if gte mso 9]><xml>
+<mso:CustomDocumentProperties>
+<mso:_dlc_DocId msdt:dt="string">EKCU4X5PN6CT-1868586276-1316092</mso:_dlc_DocId>
+<mso:_dlc_DocIdItemGuid msdt:dt="string">37bf5c20-2f01-42b4-80d0-ef65cba5acf3</mso:_dlc_DocIdItemGuid>
+<mso:_dlc_DocIdUrl msdt:dt="string">https://sakurait.sharepoint.com/_layouts/15/DocIdRedir.aspx?ID=EKCU4X5PN6CT-1868586276-1316092, EKCU4X5PN6CT-1868586276-1316092</mso:_dlc_DocIdUrl>
+</mso:CustomDocumentProperties>
+</xml><![endif]-->
+</head>
+<body>
+  <main class="container">
+
+    <!-- ============ Header ============ -->
+    <header class="app-header">
+      <h1>RAG Q&A App</h1>
+      <p class="lead">
+        Sakura AI Engine answers your question<br>
+        by referencing the registered documents.
+      </p>
+      <p class="note">
+        This app sends what you type on the Web screen to Flask,<br>
+        and Flask calls the Sakura AI Engine API.
+      </p>
+    </header>
+
+    <!-- ============ Question Input Area ============ -->
+    <section class="card">
+      <label class="field-label" for="query">Question</label>
+      <textarea
+        id="query"
+        rows="5"
+        maxlength="1000"
+        placeholder="Enter your question about the registered documents"></textarea>
+    </section>
+
+    <!-- ============ RAG Parameter Settings Area ============ -->
+    <section class="card">
+      <h2 class="card-title">RAG Parameters</h2>
+
+      <!-- top_k -->
+      <div class="param">
+        <label class="field-label" for="top-k">top_k</label>
+        <input
+          type="number"
+          id="top-k"
+          min="1"
+          max="10"
+          step="1"
+          value="3">
+        <p class="param-desc">
+          Specifies how many of the top, most relevant chunks to retrieve for the question.<br>
+          A larger value references more chunks.
+        </p>
+      </div>
+
+      <!-- threshold -->
+      <div class="param">
+        <label class="field-label" for="threshold">threshold</label>
+        <div class="slider-row">
+          <input
+            type="range"
+            id="threshold"
+            min="0"
+            max="1"
+            step="0.1"
+            value="0.3">
+          <!-- Show the slider's current value here -->
+          <span class="slider-value">Current value: <span id="threshold-value">0.3</span></span>
+        </div>
+        <p class="param-desc">
+          Specifies the threshold used when searching documents.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ Fixed Settings Display Area ============ -->
+    <section class="card fixed-settings">
+      <h2 class="card-title">Fixed Settings (Cannot Be Changed)</h2>
+      <ul>
+        <li>Search model: multilingual-e5-large</li>
+        <li>Answer-generation model: gpt-oss-120b</li>
+        <li>Distance metric: cosine</li>
+      </ul>
+    </section>
+
+    <!-- ============ Submit Button ============ -->
+    <button id="submit-button" class="submit-button">Ask</button>
+
+    <!-- ============ Error Display Area (hidden by default) ============ -->
+    <div id="error-area" class="error-area" hidden></div>
+
+    <!-- ============ Answer Display Area (hidden until an answer comes back) ============ -->
+    <section id="answer-area" class="card answer-area" hidden>
+      <h2 class="card-title">Answer</h2>
+      <!-- The answer text goes here, via textContent -->
+      <div id="answer-text" class="answer-text"></div>
+    </section>
+
+    <!-- ============ Sources Display Area (hidden until an answer comes back) ============ -->
+    <section id="sources-area" class="card sources-area" hidden>
+      <h2 class="card-title">Sources</h2>
+      <!-- Sources are added here via JavaScript -->
+      <div id="sources-list"></div>
+    </section>
+
+  </main>
+
+  <!-- Load the JavaScript -->
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
