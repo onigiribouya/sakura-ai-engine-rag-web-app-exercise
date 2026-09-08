@@ -43,7 +43,7 @@ DISTANCE_TYPE = "cosine"
 #   - Register the class documents with this tag attached.
 #   - An empty list [] means no tag filtering is applied
 #     (every registered document becomes searchable).
-# RAG_TAGS = ["class-rag"]
+RAG_TAGS = []
 
 # Name of the environment variable that holds the account token
 TOKEN_ENV_NAME = "AI_ENGINE_TOKEN"
